@@ -3,11 +3,24 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { ChakraProvider } from '@chakra-ui/react'
+import { Route, Routes, BrowserRouter } from "react-router-dom";
+import CMD from './components/CMD';
+import Projects from './components/Projects';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <ChakraProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/cmd" element={<CMD />} />
+          <Route path="/projects" element={<Projects />} />
+        </Routes>
+        
+      </BrowserRouter>
+    </ChakraProvider>
   </React.StrictMode>
 );
 
