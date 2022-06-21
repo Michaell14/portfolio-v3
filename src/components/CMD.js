@@ -1,6 +1,8 @@
+//make typing animation when cmd is opened
+
 import React, {useState, useEffect, useCallback} from 'react';
 import { useNavigate } from "react-router-dom";
-import { Box, Text, Button, useDisclosure } from '@chakra-ui/react'
+import { Box, Text, Button, Center } from '@chakra-ui/react'
 import {
     Modal,
     ModalOverlay,
@@ -13,6 +15,7 @@ import {
 import $ from "jquery"
 import { Navigate } from 'react-router-dom';
 
+
 let message="";
 let messagesArr=[];
 let index=0;
@@ -20,7 +23,6 @@ let index=0;
 function CMD() {
 
     const navigate = useNavigate();
-    const { isOpen, onOpen, onClose } = useDisclosure();
     const [messages, setMessages] = useState([]);
 
     const handleUserKeyPress = useCallback(event => {
@@ -28,20 +30,25 @@ function CMD() {
 
         //Enter key: submit message
         if(keyCode === 13){
-            const toAdd=message;
+            let toAdd=message;
             messagesArr.push(toAdd);
             setMessages(messages => [...messages, toAdd]);
 
             console.log(message);
+
             //Special command
             const splitMsg = message.split(" ");
             if (splitMsg.length>1){
                 console.log(splitMsg);
                 //Changing pages
-                if (splitMsg[0]==="cd"){
+                if (splitMsg[0]==="cd" || splitMsg[0]==="\rcd"){
+                    
+                    //Navigate to projects page
                     if (splitMsg[1]==="projects"){
-                        //Navigate to projects page
                         navigate("/projects");
+                    //Navigate to about page
+                    }else if (splitMsg[1]==="About"){
+                        
                     }
                 }
             }
@@ -78,26 +85,24 @@ function CMD() {
 
     return (
         <>
-            <Button onClick={onOpen}>CMD</Button>
+            <Center>
+                <Box backgroundColor={"#F2DDA4"} borderRadius={"15px"} w={"800px"} h={"400px"} p={7}>
 
-            <Modal isOpen={isOpen} onClose={onClose} size={"3xl"}>
-            <ModalOverlay />
-            <ModalContent  h={"80vh"}>
-                <ModalHeader>Command Prompt</ModalHeader>
-                <ModalCloseButton />
-                <ModalBody>
+                    <Text>Help:</Text>
+                    <Text>cd: redirect to a new page (projects/about)</Text>
+                    <Text>arrow keys: cycle through entered messages</Text>
                     {messages.map(item => (
                         <Box key={item}>
                             <Text as={"span"}>C:\Users\Client&gt; {item}</Text>
                         </Box>
                     ))}
                     <Text as={"span"}>C:\Users\Client&gt; </Text><Text as={"span"} id="message"></Text>
-                </ModalBody>
+          
+                </Box>
+            </Center>
 
-                <ModalFooter>
-                </ModalFooter>
-            </ModalContent>
-            </Modal>
+           
+
         </>
     )
 }
