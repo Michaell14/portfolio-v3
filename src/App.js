@@ -1,18 +1,23 @@
 import logo from './logo.svg';
 import './App.css';
 import React, {useState} from 'react';
-import { Box, Text, Image, HStack, Center, VStack, Icon, Flex} from '@chakra-ui/react'
+import { Box, Text, Image, Button, Center, VStack, Icon, Flex} from '@chakra-ui/react'
 import CMD from './components/CMD';
 import { FiGithub, FiLinkedin, FiInstagram, FiCode } from "react-icons/fi";
 import $ from "jquery";
-import gsap from 'gsap';
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const projects=["Wootton Life", "Codele", "Encryption Visualizer", "Superlatives"];
-const images=["Wootton-life.png", "Codele.png", "Encryptable.png", "Superlatives.png"]
-const descriptions=["This project was made for student at Wootton to learn about other clubs",
-                  "This is a parody of the New York Times, Wordle, but with different coding languages", 
-                  "This project was created to help visualize different encryption ciphers.",
-                "This is a game to play with your friends to vote for superlatives"]
+const projects=["Wootton Life", "Superlatives", "Encryptable", "Codele"];
+const images=["Wootton-life.png", "Superlatives.png", "Encryptable.png", "Codele.png"]
+const descriptions=["A listing for students at Wootton to view upcoming clubs and activities. Creating in an effort to promote school spirit and club interactivity. Improved my utilization of Firebase and Firebase authentication and focused more on making the interface more intuitive.",
+ "An online game to play with friends where you vote for the friend who best fits the description of the listed question. Created to make superlative games more fun, interesting, and less time consuming to make. Developed using Socket IO to keep interactions live.",
+"A tool to help visualize popular text encryption ciphers. Created to make learning about ciphers easier for students to understand.",
+"A parody of Wordle, but using programming languages instead. I thought Wordle was fun, so I make a parody for people learning about programming languages like Java or Python This was a weekend project that implements Chakra UI."]
+const tools=[["Firebase", "Chakra UI", "React JS"], ["Socket IO", "Mongo DB", "React JS"],
+["Anime JS", "Chakra UI", "React JS"], ["Chakra UI", "React JS"]]
+
+gsap.registerPlugin(ScrollTrigger);
 
 function App() {
 
@@ -20,14 +25,19 @@ function App() {
     <>
       <Box id="body">
 
-     
+        <Box position={"fixed"} right={10} top={"50%"} transform={"translateY(-50%) rotateY(180deg)"} float={"right"} >
+          <Box w={"26px"} borderTop={"2.5px solid #AF6997"} id="line1"></Box>
+          <Box w={"26px"} borderTop={"2.5px solid #AF6997"} mt={4} id="line2"></Box>
+          <Box w={"26px"} borderTop={"2.5px solid #AF6997"} mt={4} id="line3"></Box>
+          <Box w={"26px"} borderTop={"2.5px solid #AF6997"} mt={4} id="line4"></Box>
+        </Box>
 
-        <Box position={"fixed"} bottom={0} ml={"60px"}>
+        <Box position={"fixed"} bottom={0} ml={"60px"} zIndex={1}>
           <Flex direction={"column"} ml={"-9px"}>
-            <a href=""><Icon as={FiGithub} boxSize={5} mb={4}/></a>
-            <Icon as={FiLinkedin} boxSize={5} mb={4}/>
-            <Icon as={FiInstagram} boxSize={5} mb={4}/>
-            <Icon as={FiCode} boxSize={5} mb={4}/>
+            <a href="https://github.com/Michaell14" target="_blank" rel="noreferrer"><Icon as={FiGithub} boxSize={5} mb={4}/></a>
+            <a href="www.linkedin.com/in/itsmichaelli" target="_blank" rel="noreferrer"><Icon as={FiLinkedin} boxSize={5} mb={4}/></a>
+            <a href="https://www.instagram.com/michaells19/" target="_blank" rel="noreferrer"><Icon as={FiInstagram} boxSize={5} mb={4}/></a>
+            <a href="https://github.com/Michaell14/portfolio-v3" target="_blank" rel="noreferrer"><Icon as={FiCode} boxSize={5} mb={4}/></a>
           </Flex>
           <Box h={"100px"} borderLeft={"3px solid #AF6997"}></Box>
         </Box>
@@ -53,11 +63,12 @@ function App() {
                     src='michaelbrian.png'
                     alt='Michael Li'
                     zIndex={1}
+                    id="imageme"
                     />
                     <Box borderRadius={"10px"} borderColor={"#AF6997"} borderWidth={"5px"} h={"260px"} w={"260px"}
                      position={'absolute'}
-                     right={"-18px"} bottom={"75px"} zIndex={0}>
-
+                     right={"-18px"} bottom={"75px"} zIndex={0} id="backeffect"
+                     >
                     </Box>
               </Flex>
             </Flex>
@@ -68,113 +79,78 @@ function App() {
         
         
         <Center>
-          <Text fontSize={"3xl"}>What I've Built</Text>
+          <Box w={"100px"} borderTop={"2.3px solid grey"} mr={10}></Box>
+          <Text fontSize={"4xl"}>What I've <u>Built</u></Text>
+          <Box w={"100px"} borderTop={"2.3px solid grey"} ml={10}></Box>
         </Center>
       
         <Center>
-        <Box>
-              <Flex mt={20}>
-                <Box>
-                <Image src={"Wootton-life.png"} w={"550px"}/>
-                </Box>
-                
-                <Box ml={10} textAlign={"right"}>
-                  <Text fontSize={"2xl"}>Wootton Life</Text>
-                  <Box w={"550px"} h={"fit-content"} p={10} borderRadius={"15px"} borderColor={"black"} bg={"#BFD7B5"} boxShadow='xl'>
-                    <Text fontSize={"xl"}>This is a thing for students at Wootton to gain info about clubs and activities there</Text>
-                  </Box>
+        <Box id="projects">
 
-                  <Flex justify={"right"} mt={6}>
-                    <Text>Firebase</Text>
-                    <Text>Chakra UI</Text>
-                    <Text>React JS</Text>
-                  </Flex>
+          {projects.map((item, index) => (
+            <Center key={item}>
+            <Box mt={40} id={"project"+(index+1)} opacity={0} textAlign={"center"}>
+                  <Box>
+                    <Text fontSize={"4xl"} mb={10} className="title"><b>{item}</b></Text>
+                    <Image src={images[index]} w={"70vw"}/>
+                  </Box>
+  
+                  <Center>
+                    <Box mt={"-50px"}>
+                    <Box w={"50vw"} h={"fit-content"} p={5} borderRadius={"5px"} borderColor={"black"} bg={"#BFD7B5"} boxShadow='md'>
+                      <Text fontSize={"md"} lineHeight={"20px"}>{descriptions[index]}</Text>
+                    </Box>
+  
+                    <Flex mt={6} justify={"center"}>
+                      {tools[index].map((tool) => (
+                        <Text mr={5} key={tool}>{tool}</Text>
+                      ))}
+                    </Flex>
+                    </Box>
+                  </Center>
                   
                 </Box>
-              </Flex>
-             
-              
-            <Flex mt={20}>
-                
-                <Box mr={10} textAlign={"left"}>
-                  <Text fontSize={"2xl"}>{"Superlatives"}</Text>
-                  <Box w={"550px"} h={"fit-content"} p={10} borderRadius={"15px"} borderColor={"black"} bg={"#BFD7B5"} boxShadow='xl'>
-                    <Text fontSize={"xl"}>This is a game for friends where you ask questions with each other</Text>
+            </Center>
+          ))}
 
-                  </Box>
-                  <Flex justify={"left"} mt={6}>
-                    <Text>Firebase</Text>
-                    <Text>Chakra UI</Text>
-                    <Text>React JS</Text>
-                  </Flex>
-                </Box>
-                <Box>
-                <Image src={"Superlatives.png"} w={"550px"}/>
-                </Box>
-              </Flex>
-              <Flex mt={20}>
-                <Box>
-                <Image src={"Encryptable.png"} w={"550px"}/>
-                </Box>
-                
-                <Box ml={10} textAlign={"right"}>
-                  <Text fontSize={"2xl"}>Encryptable</Text>
-                  <Box w={"550px"} h={"fit-content"} p={10} borderRadius={"15px"} borderColor={"black"} bg={"#BFD7B5"} boxShadow='xl'>
-                    <Text fontSize={"xl"}>This is an encyption visualizer</Text>
-                  </Box>
-                  <Flex justify={"right"} mt={6}>
-                    <Text>Firebase</Text>
-                    <Text>Chakra UI</Text>
-                    <Text>React JS</Text>
-                  </Flex>
-                </Box>
-              </Flex>
-              <Flex mt={20}>
-               <Box mr={10} textAlign={"left"}>
-                  <Text fontSize={"2xl"}>Codele</Text>
-                  <Box w={"550px"} h={"fit-content"} p={10} borderRadius={"15px"} borderColor={"black"} bg={"#BFD7B5"} boxShadow='xl'>
-                    <Text fontSize={"xl"}>A Wordle parody where you guess a word</Text>
-                  </Box>
-                  <Flex justify={"right"} mt={6}>
-                    <Text>Firebase</Text>
-                    <Text>Chakra UI</Text>
-                    <Text>React JS</Text>
-                  </Flex>
-                </Box>
-                <Box>
-                <Image src={"Codele.png"} w={"600px"}/>
-                </Box>
-                
-                
-              </Flex>
+
+              
+          
               
 
         </Box>
         </Center>
         
 
-            <Box my={20}>
+            <Box my={40}>
               <CMD/>
             </Box>
          
-            <Center>
-              <Box>
-                <Text fontSize={"3xl"}>More About Me!</Text>
+            <Center my={60}>
+              <Box id="moreinfo">
+                <Center><Text fontSize={"3xl"}>More About Me!</Text></Center>
+                
                 <Text w={"600px"}>Again, my name is Michael and I want to make things that are cool and interactive.
                   My interest in computer science started in middle school and extended into now. 
                   Now, I have the opportunity to promote computer science through CodeDay DC, Kids For Code, and many more organizations.
 
-                  I am also a part of many clubs in my school with a focus in technologies.
+                  I am also a part of many clubs in my school with a focus in computer science, notably the Game Development, Robotics, and Competitive Programming clubs.
 
-                  Here are some of my technology strenths:</Text>
+                  Check out my technological strengths:</Text>
               </Box>
               
             </Center>
+            <Box w={"90vw"} borderTop={"1px solid grey"} mt={10}></Box>
+          <Center my={5}>
 
-          <Center>
-            <Text>Check out the older versions of my portfolio website!</Text>
-            <Text><a href="https://portfolio-git-master-michaell14.vercel.app/" target="_blank">V2</a></Text>
-            <Text><a href="https://personalwebsite-neon.vercel.app/" target="_blank">V1</a></Text>
+            <Flex justify={"space-between"}>
+              <Box>
+                <Text>Older Versions:</Text>
+                <a href="https://portfolio-git-master-michaell14.vercel.app/" target="_blank"><Button variant="ghost">V2</Button></a>
+                <a href="https://personalwebsite-neon.vercel.app/" target="_blank"><Button variant="ghost">V1</Button></a>
+              </Box>
+            </Flex>
+            
           </Center>
       </Box>
     </>
@@ -182,7 +158,7 @@ function App() {
   );
 }
 
-const descriptors=["Developer", " Student", "Athlete"];
+const descriptors=["Developer", "Student", "Athlete"];
 
 $(function(){
   write(0, 0);
@@ -190,23 +166,121 @@ $(function(){
 
 function write(index, arrayIndex){
   if (index>=descriptors[arrayIndex].length){
-    setTimeout(remove, 800, index-1, arrayIndex);
+    setTimeout(remove, 1100, index-1, arrayIndex);
     return;
   }
   $("#descriptor").text("a " + descriptors[arrayIndex].substring(0, index+1));
-  setTimeout(write, 180, index+1, arrayIndex);
+  setTimeout(write, 250, index+1, arrayIndex);
 }
 
 function remove(index, arrayIndex){
   if (index<=0){
     arrayIndex=(arrayIndex+1)%3;
-    setTimeout(write, 500, 0, arrayIndex);
+    setTimeout(write, 600, 0, arrayIndex);
     return;
   }
 
   $("#descriptor").text("a "+ descriptors[arrayIndex].substring(0, index-1));
-  setTimeout(remove, 130, index-1, arrayIndex);
+  setTimeout(remove, 200, index-1, arrayIndex);
 }
+
+$(function(){
+
+  //Project animations
+  gsap.to("#project1", {
+    scrollTrigger: {
+      trigger: "#project1",
+      start: "top 72%",
+    },
+    duration:.9,
+    y: -15,
+    opacity: 1
+  })
+  gsap.to("#project2", {
+    scrollTrigger: {
+      trigger: "#project2",
+      start: "top 72%",
+    },
+    duration:.9,
+    y: -15,
+    opacity: 1
+  })
+  gsap.to("#project3", {
+    scrollTrigger: {
+      trigger: "#project3",
+      start: "top 72%",
+    },
+    duration:.9,
+    y: -15,
+    opacity: 1
+  })
+  gsap.to("#project4", {
+    scrollTrigger: {
+      trigger: "#project4",
+      start: "top 72%",
+    },
+    duration:.9,
+    y: -15,
+    opacity: 1
+  })
+
+
+  //Animate lines on the right side
+  gsap.to("#line1", {
+    scrollTrigger: {
+      trigger: "#imageme",
+      toggleActions: "restart reverse restart reverse"
+    },
+    width: "35px",
+    duration:.16
+  })
+
+  gsap.to("#line2", {
+    scrollTrigger: {
+      trigger: "#projects",
+      toggleActions: "restart reverse restart reverse"
+    },
+    width: "35px",
+    duration:.16
+  })
+
+  gsap.to("#line3", {
+    scrollTrigger: {
+      trigger: "#cmd",
+      toggleActions: "restart reverse restart reverse"
+    },
+    width: "35px",
+    duration:.16
+  })
+
+  gsap.to("#line4", {
+    scrollTrigger: {
+      trigger: "#moreinfo",
+      toggleActions: "restart reverse restart reverse"
+    },
+    width: "35px",
+    duration:.16
+  })
+
+  document.getElementById("imageme").addEventListener("mouseover", function( event ) {
+    gsap.to("#backeffect", {
+      duration: .5,
+      y: -4,
+      x: 4,
+      backgroundColor: "rgba(191, 135, 172, .3)"
+    })
+  });
+
+  document.getElementById("imageme").addEventListener("mouseout", function(event){
+    gsap.to("#backeffect", {
+      duration: .5,
+      y: 4,
+      x: -4,
+      backgroundColor: "rgba(0,0,0,0)"
+    })
+  })
+})
+
 
 
 export default App;

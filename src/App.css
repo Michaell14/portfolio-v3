@@ -32,16 +32,6 @@ h1 {
   letter-spacing: 1px;
   font-size: 12px;
   transform: translate(-50%, -50%);
-  
-  svg {
-    width: 14px;
-    display: block;
-    margin: 10px auto;
-    
-    .arrow {
-      animation: scroll .35s ease-in alternate infinite;
-    }
-  }
 }
 
 @keyframes scroll {
@@ -65,4 +55,68 @@ h1 {
   background-position: center;
   mask: url('http://www.supah.it/dribbble/video-clip-mask.png?v=1');
   mask-size: 1800% 100%;
+}
+
+
+#imageme:hover {
+  animation: toGray .5s forwards
+}
+
+@keyframes toGray{
+  from{
+    filter: grayscale(0);
+  }
+  to{
+    filter: grayscale(.3);
+  }
+}
+
+
+
+#descriptor::after {
+  content:'';
+  display:inline-block;
+  margin-left:3px;
+  margin-bottom: -2px;
+  background-color: rgba(109, 108, 107, .85);
+  animation-name:blink;
+  animation-duration:1.05s;
+  animation-iteration-count: infinite;
+  border-radius: 1.5px;
+}
+#descriptor::after {
+  height:13px;
+  width:29px;
+}
+
+@keyframes blink {
+  0% {
+    opacity:1;
+  }
+  49% {
+    opacity:1;
+  }
+  50% {
+    opacity:0;
+  }
+  100% {
+    opacity:0;
+  }
+}
+
+
+/* Title effect */
+.title{
+  text-transform: uppercase;
+  display: inline-block;
+  text-decoration: none;
+  background-image: linear-gradient(to right, #AF6997, #AF6997);
+  background-position: bottom 7px left;
+  background-repeat: no-repeat;
+  background-size: 100% 20px;
+  transition: background-size .5s ease;
+}
+.title:hover {
+  background-size: 100% 48px;
+  cursor: pointer;
 }

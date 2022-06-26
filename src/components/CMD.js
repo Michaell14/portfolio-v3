@@ -85,10 +85,10 @@ function CMD() {
 
     return (
         <>
-            <Center>
-                <Box backgroundColor={"#F2DDA4"} borderRadius={"15px"} w={"800px"} h={"400px"} p={7}>
+            <Center mt={20}>
+                <Box backgroundColor={"#F2DDA4"} borderRadius={"6px"} w={"800px"} h={"400px"} p={7}>
 
-                    <Text>Help:</Text>
+                    <Text id="cmd">Help:</Text>
                     <Text>cd: redirect to a new page (projects/about)</Text>
                     <Text>arrow keys: cycle through entered messages</Text>
                     {messages.map(item => (
