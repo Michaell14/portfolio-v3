@@ -9,7 +9,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const projects=["WOOTTON LIFE", "SUPERLATIVES", "ENCRYPTABLE", "CODELE"];
-const images=["Wootton-life.png", "Superlatives.png", "Encryptable.png", "Codele.png"]
+const images=["Wootton-Life.png", "Superlatives.png", "Encryptable.png", "Codele.png"]
 const descriptions=["A listing for students at Wootton to view upcoming clubs and activities. Creating in an effort to promote school spirit and club interactivity. Improved my utilization of Firebase and Firebase authentication and focused more on making the interface more intuitive.",
  "An online game to play with friends where you vote for the friend who best fits the description of the listed question. Created to make superlative games more fun, interesting, and less time consuming to make. Developed using Socket IO to keep interactions live.",
 "A tool to help visualize popular text encryption ciphers. Created to make learning about ciphers easier for students to understand.",
