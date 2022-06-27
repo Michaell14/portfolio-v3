@@ -2,3 +2,29 @@
   margin: 0;
   padding: 0;
 }
+
+
+.underline, .menuunderline{
+  position: relative;
+}
+
+.underline::before, .menuunderline::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 4px;
+  border-radius: 2px;
+  inset: 100% 0 0 0;
+  transform: scaleX(0);
+  transition: transform .4s ease;
+  background: linear-gradient(315deg, #9b3cbe 0%, #e37f86 100%);
+}
+
+.menuunderline:hover::before, .underline:hover::before{
+  transform: scaleX(.7);
+}
+
+hr{
+  border: 1px grey solid;
+}

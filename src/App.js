@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import React, {useState} from 'react';
-import { Box, Text, Image, Button, Center, VStack, Icon, Flex} from '@chakra-ui/react'
+import { Box, Text, Image, Button, Center, IconButton, Icon, Flex} from '@chakra-ui/react'
 import CMD from './components/CMD';
 import { FiGithub, FiLinkedin, FiInstagram, FiCode } from "react-icons/fi";
 import $ from "jquery";
@@ -16,6 +16,10 @@ const descriptions=["A listing for students at Wootton to view upcoming clubs an
 "A parody of Wordle, but using programming languages instead. I thought Wordle was fun, so I make a parody for people learning about programming languages like Java or Python This was a weekend project that implements Chakra UI."]
 const tools=[["Firebase", "Chakra UI", "React JS"], ["Socket IO", "Mongo DB", "React JS"],
 ["Anime JS", "Chakra UI", "React JS"], ["Chakra UI", "React JS"]]
+const links=["https://woottonlife.vercel.app/", "https://superlatives3.vercel.app/", "https://encryption-visualizer.vercel.app/", "https://codele.vercel.app/"];
+const colorSchemes=["red", "purple", "cyan", "green"];
+const sourceCodes=["https://github.com/Michaell14/woottonlife", "https://github.com/Michaell14/superlatives3",
+"https://github.com/Michaell14/encrypt-visualizer", "https://github.com/Michaell14/codele"];
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -26,16 +30,16 @@ function App() {
       <Box id="body">
 
         <Box position={"fixed"} right={10} top={"50%"} transform={"translateY(-50%) rotateY(180deg)"} float={"right"} >
-          <Box w={"26px"} borderTop={"2.5px solid #AF6997"} id="line1"></Box>
-          <Box w={"26px"} borderTop={"2.5px solid #AF6997"} mt={4} id="line2"></Box>
-          <Box w={"26px"} borderTop={"2.5px solid #AF6997"} mt={4} id="line3"></Box>
-          <Box w={"26px"} borderTop={"2.5px solid #AF6997"} mt={4} id="line4"></Box>
+          <Box w={"27px"} borderTop={"2.8px solid #AF6997"} id="line1"></Box>
+          <Box w={"27px"} borderTop={"2.8px solid #AF6997"} mt={4} id="line2"></Box>
+          <Box w={"27px"} borderTop={"2.8px solid #AF6997"} mt={4} id="line3"></Box>
+          <Box w={"27px"} borderTop={"2.8px solid #AF6997"} mt={4} id="line4"></Box>
         </Box>
 
         <Box position={"fixed"} bottom={0} ml={"60px"} zIndex={1}>
           <Flex direction={"column"} ml={"-9px"}>
             <a href="https://github.com/Michaell14" target="_blank" rel="noreferrer"><Icon as={FiGithub} boxSize={5} mb={4}/></a>
-            <a href="www.linkedin.com/in/itsmichaelli" target="_blank" rel="noreferrer"><Icon as={FiLinkedin} boxSize={5} mb={4}/></a>
+            <a href="https://www.linkedin.com/in/itsmichaelli" target="_blank" rel="noreferrer"><Icon as={FiLinkedin} boxSize={5} mb={4}/></a>
             <a href="https://www.instagram.com/michaells19/" target="_blank" rel="noreferrer"><Icon as={FiInstagram} boxSize={5} mb={4}/></a>
             <a href="https://github.com/Michaell14/portfolio-v3" target="_blank" rel="noreferrer"><Icon as={FiCode} boxSize={5} mb={4}/></a>
           </Flex>
@@ -44,7 +48,7 @@ function App() {
         
 
 
-        <Box h={"100vh"} pos={"relative"}>
+        <Box h={"100vh"} pos={"relative"} id="intro" opacity={0} mt={"20px"}>
           <Flex align={"center"} justify={"center"} direction={"column"}>
             
             <Flex mt={"120px"} align={"center"} position={"relative"}>
@@ -78,9 +82,9 @@ function App() {
        
         
         
-        <Center>
+        <Center id="projectItems">
           <Box w={"100px"} borderTop={"2.3px solid grey"} mr={10}></Box>
-          <Text fontSize={"4xl"}>What I've <u>Built</u></Text>
+          <Text fontSize={"4xl"}>What I've <a href="https://github.com/Michaell14" target="_blank" rel="noreferrer" className="title">Built</a></Text>
           <Box w={"100px"} borderTop={"2.3px solid grey"} ml={10}></Box>
         </Center>
       
@@ -91,8 +95,11 @@ function App() {
             <Center key={item}>
             <Box mt={40} id={"project"+(index+1)} opacity={0} textAlign={"center"}>
                   <Box>
-                    <Text fontSize={"4xl"} mb={10} className="title"><b>{item}</b></Text>
-                    <Image src={images[index]} w={"70vw"}/>
+                    <Text fontSize={"4xl"} mb={10} className="title" id={"title"+(index+1)}><a href={links[index]} rel="noreferrer" target="_blank"><b>{item}</b></a></Text>
+                    <Box boxShadow={"lg"}>
+                      <Image src={images[index]} h={"70vh"}/>
+                      <a href={sourceCodes[index]} target="_blank" rel="noreferrer"><IconButton colorScheme={colorSchemes[index]} aria-label='Source Code' icon={<FiCode />} position="absolute" right={10} top={"72vh"}/></a>
+                    </Box>
                   </Box>
   
                   <Center>
@@ -121,36 +128,36 @@ function App() {
         </Box>
         </Center>
         
-
-            <Box my={40}>
+{/*}
+            <Box pt={20} my={20} id="cmdbox">
               <CMD/>
-            </Box>
+                      </Box>*/}
          
-            <Center my={60}>
+            <Center py={60}>
               <Box id="moreinfo">
                 <Center><Text fontSize={"3xl"}>More About Me!</Text></Center>
                 
-                <Text w={"600px"}>Again, my name is Michael and I want to make things that are cool and interactive.
+                <Text w={"550px"} mt={10}>Hey, my name is Michael and I like to make things that are cool and interactive.
                   My interest in computer science started in middle school and extended into now. 
                   Now, I have the opportunity to promote computer science through CodeDay DC, Kids For Code, and many more organizations.
 
-                  I am also a part of many clubs in my school with a focus in computer science, notably the Game Development, Robotics, and Competitive Programming clubs.
-
-                  Check out my technological strengths:</Text>
+                  I am also a part of many clubs in my school with a focus in computer science, notably the Game Development, Robotics, and Competitive Programming clubs.</Text>
+                    
+                  <Text mt={5}>Feel free to contact me through <a href="mailto: limichael319@gmail.com" target="_blank" rel="noreferrer" className="socials">email</a>. Find my resume {" "}<a href="Michael_Li_Resumef.pdf" className="socials" alt="michael_li_resume" target="_blank" rel="noreferrer">here</a>.</Text>
               </Box>
               
             </Center>
-            <Box w={"90vw"} borderTop={"1px solid grey"} mt={10}></Box>
+            <hr/>
           <Center my={5}>
-
-            <Flex justify={"space-between"}>
               <Box>
-                <Text>Older Versions:</Text>
-                <a href="https://portfolio-git-master-michaell14.vercel.app/" target="_blank"><Button variant="ghost">V2</Button></a>
-                <a href="https://personalwebsite-neon.vercel.app/" target="_blank"><Button variant="ghost">V1</Button></a>
+                <Text>Previous Versions of my Portfolio Website:</Text>
+                <Center>
+
+                
+                  <a href="https://portfolio-git-master-michaell14.vercel.app/" target="_blank" rel="noreferrer"><Button variant="ghost">V2</Button></a>
+                  <a href="https://personalwebsite-neon.vercel.app/" target="_blank" rel="noreferrer"><Button variant="ghost">V1</Button></a>
+                </Center>
               </Box>
-            </Flex>
-            
           </Center>
       </Box>
     </>
@@ -185,6 +192,11 @@ function remove(index, arrayIndex){
 }
 
 $(function(){
+  gsap.to("#intro", {
+    duration: 1.2,
+    y: -20,
+    opacity: 1
+  })
 
   //Project animations
   gsap.to("#project1", {
@@ -231,7 +243,7 @@ $(function(){
       trigger: "#imageme",
       toggleActions: "restart reverse restart reverse"
     },
-    width: "35px",
+    width: "36px",
     duration:.16
   })
 
@@ -240,7 +252,7 @@ $(function(){
       trigger: "#projects",
       toggleActions: "restart reverse restart reverse"
     },
-    width: "35px",
+    width: "36px",
     duration:.16
   })
 
@@ -249,7 +261,7 @@ $(function(){
       trigger: "#cmd",
       toggleActions: "restart reverse restart reverse"
     },
-    width: "35px",
+    width: "36px",
     duration:.16
   })
 
@@ -258,7 +270,7 @@ $(function(){
       trigger: "#moreinfo",
       toggleActions: "restart reverse restart reverse"
     },
-    width: "35px",
+    width: "36px",
     duration:.16
   })
 
@@ -279,7 +291,10 @@ $(function(){
       backgroundColor: "rgba(0,0,0,0)"
     })
   })
+  
+  
 })
+
 
 
 

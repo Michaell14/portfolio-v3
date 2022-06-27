@@ -20,8 +20,6 @@
 }
 
 
-
-
 h1 {
   position: fixed;
   top: 50%;
@@ -77,8 +75,8 @@ h1 {
   content:'';
   display:inline-block;
   margin-left:3px;
-  margin-bottom: -2px;
-  background-color: rgba(109, 108, 107, .85);
+  margin-bottom: -1px;
+  background-color: rgba(109, 108, 107, .88);
   animation-name:blink;
   animation-duration:1.05s;
   animation-iteration-count: infinite;
@@ -86,7 +84,7 @@ h1 {
 }
 #descriptor::after {
   height:13px;
-  width:29px;
+  width:32px;
 }
 
 @keyframes blink {
@@ -110,13 +108,44 @@ h1 {
   text-transform: uppercase;
   display: inline-block;
   text-decoration: none;
-  background-image: linear-gradient(to right, #AF6997, #AF6997);
   background-position: bottom 7px left;
   background-repeat: no-repeat;
   background-size: 100% 20px;
   transition: background-size .5s ease;
+  padding: 0 15px;
 }
 .title:hover {
   background-size: 100% 48px;
   cursor: pointer;
+}
+
+#title1{
+  background-image: linear-gradient( 135deg, #FF416C 10%, #FF4B2B 100%);
+}
+
+#title2{
+  background-image: linear-gradient( 135deg, #9D50BB 10%, rgb(124, 82, 192) 100%);
+}
+
+#title3{
+  background-image: linear-gradient( 135deg, #06beb6 10%, #48b1bf 100%);
+}
+
+#title4{
+  background-image: linear-gradient( 135deg, #38ef7d 10%, #11998e 100%);
+}
+
+.socials{
+  position: relative;
+}
+
+.socials::before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  left: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(315deg, #9b3cbe 0%, #e37f86 100%);
 }
