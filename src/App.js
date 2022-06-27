@@ -8,7 +8,7 @@ import $ from "jquery";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const projects=["Wootton Life", "Superlatives", "Encryptable", "Codele"];
+const projects=["WOOTTON LIFE", "SUPERLATIVES", "ENCRYPTABLE", "CODELE"];
 const images=["Wootton-life.png", "Superlatives.png", "Encryptable.png", "Codele.png"]
 const descriptions=["A listing for students at Wootton to view upcoming clubs and activities. Creating in an effort to promote school spirit and club interactivity. Improved my utilization of Firebase and Firebase authentication and focused more on making the interface more intuitive.",
  "An online game to play with friends where you vote for the friend who best fits the description of the listed question. Created to make superlative games more fun, interesting, and less time consuming to make. Developed using Socket IO to keep interactions live.",
@@ -32,7 +32,7 @@ function App() {
         <Box position={"fixed"} right={10} top={"50%"} transform={"translateY(-50%) rotateY(180deg)"} float={"right"} >
           <Box w={"27px"} borderTop={"2.8px solid #AF6997"} id="line1"></Box>
           <Box w={"27px"} borderTop={"2.8px solid #AF6997"} mt={4} id="line2"></Box>
-          <Box w={"27px"} borderTop={"2.8px solid #AF6997"} mt={4} id="line3"></Box>
+          {/*<Box w={"27px"} borderTop={"2.8px solid #AF6997"} mt={4} id="line3"></Box>*/}
           <Box w={"27px"} borderTop={"2.8px solid #AF6997"} mt={4} id="line4"></Box>
         </Box>
 
@@ -84,7 +84,7 @@ function App() {
         
         <Center id="projectItems">
           <Box w={"100px"} borderTop={"2.3px solid grey"} mr={10}></Box>
-          <Text fontSize={"4xl"}>What I've <a href="https://github.com/Michaell14" target="_blank" rel="noreferrer" className="title">Built</a></Text>
+          <Text fontSize={"4xl"}>What I've {" "}<a href="https://github.com/Michaell14" target="_blank" rel="noreferrer" id="maintitle" className="title">Built</a></Text>
           <Box w={"100px"} borderTop={"2.3px solid grey"} ml={10}></Box>
         </Center>
       
@@ -143,14 +143,13 @@ function App() {
 
                   I am also a part of many clubs in my school with a focus in computer science, notably the Game Development, Robotics, and Competitive Programming clubs.</Text>
                     
-                  <Text mt={5}>Feel free to contact me through <a href="mailto: limichael319@gmail.com" target="_blank" rel="noreferrer" className="socials">email</a>. Find my resume {" "}<a href="Michael_Li_Resumef.pdf" className="socials" alt="michael_li_resume" target="_blank" rel="noreferrer">here</a>.</Text>
+                  <Text mt={5}>Feel free to contact me through <a href="mailto: limichael909@gmail.com" target="_blank" rel="noreferrer" className="socials">email</a>. Find my resume {" "}<a href="Michael_Li_Resume.pdf" className="socials" alt="michael_li_resume" target="_blank" rel="noreferrer">here</a>.</Text>
               </Box>
               
             </Center>
-            <hr/>
           <Center my={5}>
               <Box>
-                <Text>Previous Versions of my Portfolio Website:</Text>
+                <Text>previous versions of this website:</Text>
                 <Center>
 
                 

@@ -105,7 +105,6 @@ h1 {
 
 /* Title effect */
 .title{
-  text-transform: uppercase;
   display: inline-block;
   text-decoration: none;
   background-position: bottom 7px left;
@@ -117,6 +116,11 @@ h1 {
 .title:hover {
   background-size: 100% 48px;
   cursor: pointer;
+}
+
+#maintitle{
+  background-image: linear-gradient( 135deg, #808080 10%, #808080 100%);
+  padding: 0 0;
 }
 
 #title1{
