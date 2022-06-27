@@ -201,7 +201,7 @@ $(function(){
   gsap.to("#project1", {
     scrollTrigger: {
       trigger: "#project1",
-      start: "top 72%",
+      start: "top 75%",
     },
     duration:.9,
     y: -15,
@@ -210,7 +210,7 @@ $(function(){
   gsap.to("#project2", {
     scrollTrigger: {
       trigger: "#project2",
-      start: "top 72%",
+      start: "top 75%",
     },
     duration:.9,
     y: -15,
@@ -219,7 +219,7 @@ $(function(){
   gsap.to("#project3", {
     scrollTrigger: {
       trigger: "#project3",
-      start: "top 72%",
+      start: "top 75%",
     },
     duration:.9,
     y: -15,
@@ -228,7 +228,7 @@ $(function(){
   gsap.to("#project4", {
     scrollTrigger: {
       trigger: "#project4",
-      start: "top 72%",
+      start: "top 75%",
     },
     duration:.9,
     y: -15,
