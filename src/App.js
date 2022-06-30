@@ -82,7 +82,7 @@ function App() {
         }
 
 
-        <Box h={"100vh"} pos={"relative"} id="intro" opacity={0} mt={"20px"}>
+        <Box h={"100vh"} pos={"relative"} id="intro" opacity={0} mt={"20px"} className="opacity">
           <Flex justify={"center"}>
             
             <Flex mt={"120px"} align={"center"} position={"relative"}>
@@ -126,7 +126,7 @@ function App() {
 
           {projects.map((item, index) => (
             <Center key={item}>
-            <Box mt={40} id={"project"+(index+1)} opacity={0} textAlign={"center"}>
+            <Box mt={40} id={"project"+(index+1)} opacity={0} textAlign={"center"} className="opacity">
                 
                   <Box>
                     <Text fontSize={"4xl"} mb={10} className="title" id={"title"+(index+1)}><a href={links[index]} rel="noreferrer" target="_blank"><b>{item}</b></a></Text>
