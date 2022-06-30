@@ -1,6 +1,6 @@
 import './App.css';
-import React, {useState} from 'react';
-import { Box, Text, Image, Button, Center, IconButton, Icon, Flex, useDisclosure, Radio, RadioGroup, Stack} from '@chakra-ui/react'
+import React, {useState, useEffect,useLayoutEffect} from 'react';
+import { Box, Text, Image, Button, Center, IconButton, Icon, Flex, useDisclosure, Radio, Container, Stack} from '@chakra-ui/react'
 import { Drawer, DrawerBody, DrawerFooter, DrawerHeader, DrawerOverlay, DrawerContent,DrawerCloseButton} from '@chakra-ui/react'
 import CMD from './components/CMD';
 import { FiGithub, FiLinkedin, FiInstagram, FiCode } from "react-icons/fi";
@@ -27,11 +27,32 @@ const colors=[["AF6997", "BFD7B5", "808080", "AF6997", "383737"],["0081a7", "00a
 
 gsap.registerPlugin(ScrollTrigger);
 
+
+const getWidth = () => window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+
 function App() {
 
+  let [width, setWidth] = useState(getWidth());
   const [colorIndex, setIndex] = useState(0);
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef()
+
+  useEffect(() => {
+    const resizeListener = () => {
+      // change width from the state object
+      setWidth(getWidth())
+      console.log(width);
+    };
+    // set resize listener
+    window.addEventListener('resize', resizeListener);
+
+    // clean up function
+    return () => {
+      // remove resize listener
+      window.removeEventListener('resize', resizeListener);
+    }
+  }, [])
+
 
   return (
     <>
@@ -39,14 +60,16 @@ function App() {
 
 
       <Box>
-
-        <Box position={"fixed"} right={10} top={"50%"} transform={"translateY(-50%) rotateY(180deg)"} float={"right"} >
+        {width>650 && 
+          <Box position={"fixed"} right={10} top={"50%"} transform={"translateY(-50%) rotateY(180deg)"} float={"right"} >
           <Box w={"27px"} borderTop={"2.8px solid #" + colors[colorIndex][0]} id="line1"></Box>
           <Box w={"27px"} borderTop={"2.8px solid #" + colors[colorIndex][0]} mt={4} id="line2"></Box>
           {/*<Box w={"27px"} borderTop={"2.8px solid #" + colors[colorIndex][0]} mt={4} id="line3"></Box>*/}
           <Box w={"27px"} borderTop={"2.8px solid #" + colors[colorIndex][0]} mt={4} id="line4"></Box>
         </Box>
-
+        }
+        
+        {width>650 && 
         <Box position={"fixed"} bottom={0} ml={"60px"} zIndex={1}>
           <Flex direction={"column"} ml={"-9px"}>
             <a href="https://github.com/Michaell14" target="_blank" rel="noreferrer"><Icon as={FiGithub} boxSize={5} mb={4}/></a>
@@ -56,21 +79,22 @@ function App() {
           </Flex>
           <Box h={"100px"} borderLeft={"3px solid #" + colors[colorIndex][0]}></Box>
         </Box>
-        
+        }
 
 
         <Box h={"100vh"} pos={"relative"} id="intro" opacity={0} mt={"20px"}>
-          <Flex align={"center"} justify={"center"} direction={"column"}>
+          <Flex justify={"center"}>
             
             <Flex mt={"120px"} align={"center"} position={"relative"}>
-              <Box mr={"250px"}>
-                  <Text fontSize="40px" color={"#"+colors[colorIndex][0]}><b>Hey!</b></Text>
-                  <Text fontSize="70px" color={"#" + colors[colorIndex][4]}><b>I'm Michael Li,</b></Text>
-                  <Text fontSize="70px" color={"#6D6C6B"}><b id="descriptor"></b></Text>
-                  <Text w={"400px"} fontSize={"lg"}>I'm a high school student in Maryland who loves to code and listen to music.
+              <Box mr={"18vw"} className="box">
+                  <Text fontSize="40px" color={"#"+colors[colorIndex][0]} className='fontsize1'><b>Hey!</b></Text>
+                  <Text fontSize="70px" color={"#" + colors[colorIndex][4]} className="fontsize2"><b>I'm Michael Li,</b></Text>
+                  <Text fontSize="70px" color={"#6D6C6B"}><b id="descriptor" className="fontsize2"></b></Text>
+                  <Text w={"400px"} fontSize={"lg"} className="fontsize3">I'm a high school student in Maryland who loves to code and listen to music.
                   I am focused on web development, artifical intelligence, and competitive programming. 
                   </Text>
               </Box>
+              {width>900 && 
                   <Image
                     borderRadius='10px'
                     boxSize='260px'
@@ -79,12 +103,13 @@ function App() {
                     alt='Michael Li'
                     zIndex={1}
                     id="imageme"
-                    />
-                    <Box borderRadius={"10px"} borderColor={"#AF6997"} borderWidth={"5px"} h={"260px"} w={"260px"}
+                    />}
+                  {width>900 &&
+                <Box borderRadius={"10px"} borderColor={"#AF6997"} borderWidth={"5px"} h={"260px"} w={"260px"}
                      position={'absolute'}
                      right={"-18px"} bottom={"75px"} zIndex={0} id="backeffect"
                      >
-                    </Box>
+                </Box>}
               </Flex>
             </Flex>
         </Box>
@@ -106,23 +131,22 @@ function App() {
                   <Box>
                     <Text fontSize={"4xl"} mb={10} className="title" id={"title"+(index+1)}><a href={links[index]} rel="noreferrer" target="_blank"><b>{item}</b></a></Text>
                     <Box boxShadow={"lg"}>
-                      <Image src={images[index]} h={"70vh"} id={"image"+(index+1)}/>
-                      <a href={sourceCodes[index]} target="_blank" rel="noreferrer"><IconButton colorScheme={colorSchemes[index]} aria-label='Source Code' icon={<FiCode />} position="absolute" right={10} bottom={"17vh"}/></a>
+                      <Center><Image src={images[index]} w={"70vw"} h={"70vh"} id={"image"+(index+1)} className="images"/></Center>
+                      {width>1100 && <a href={sourceCodes[index]} target="_blank" rel="noreferrer"><IconButton colorScheme={colorSchemes[index]} aria-label='Source Code' icon={<FiCode />} position="absolute" right={10} top={"72vh"}/></a>}
                     </Box>
-                    
                   </Box>
   
                   <Center>
                     <Box mt={"-50px"}>
-                    <Box w={"50vw"} h={"fit-content"} p={5} borderRadius={"5px"} borderColor={"black"} bg={"#" + colors[colorIndex][1]} boxShadow='md'>
-                      <Text fontSize={"md"} lineHeight={"20px"}>{descriptions[index]}</Text>
-                    </Box>
+                      <Box w={"50vw"} h={"fit-content"} p={5} borderRadius={"5px"} borderColor={"black"} bg={"#" + colors[colorIndex][1]} boxShadow='md' className={"descriptions"}>
+                        <Text fontSize={"md"} lineHeight={"20px"}>{descriptions[index]}</Text>
+                      </Box>
   
-                    <Flex mt={6} justify={"center"}>
-                      {tools[index].map((tool) => (
-                        <Text mr={5} key={tool}>{tool}</Text>
-                      ))}
-                    </Flex>
+                      <Flex mt={6} justify={"center"} className="tools">
+                        {tools[index].map((tool) => (
+                          <Text mr={5} key={tool}>{tool}</Text>
+                        ))}
+                      </Flex>
                     </Box>
                   </Center>
                   
@@ -140,15 +164,15 @@ function App() {
          
             <Center py={60}>
               <Box id="moreinfo">
-                <Center><Text fontSize={"3xl"}>More About Me!</Text></Center>
+                <Center><Text fontSize={"3xl"} className="title3">More About Me!</Text></Center>
                 
-                <Text w={"550px"} mt={10}>Hey, my name is Michael and I like to make things that are cool and interactive.
+                <Container maxW={"600px"} mt={10} className="fontsize3">Hey, my name is Michael and I like to make things that are cool and interactive.
                   My interest in computer science started in middle school and extended into now. 
                   Now, I have the opportunity to promote computer science through CodeDay DC, Kids For Code, and many more organizations.
 
-                  I am also a part of many clubs in my school with a focus in computer science, notably the Game Development, Robotics, and Competitive Programming clubs.</Text>
+                  I am also a part of many clubs in my school with a focus in computer science, notably the Game Development, Robotics, and Competitive Programming clubs.</Container>
                     
-                  <Text mt={5}>Feel free to contact me through <a href="mailto: limichael909@gmail.com" target="_blank" rel="noreferrer" className="socials">email</a>. Find my resume {" "}<a href="Michael_Li_Resume.pdf" className="socials" alt="michael_li_resume" target="_blank" rel="noreferrer">here</a>.</Text>
+                  <Container maxW={"600px"} mt={5} className="fontsize3">Feel free to contact me through <a href="mailto: limichael909@gmail.com" target="_blank" rel="noreferrer" className="socials">email</a>. Find my resume {" "}<a href="Michael_Li_Resume.pdf" className="socials" alt="michael_li_resume" target="_blank" rel="noreferrer">here</a>.</Container>
               </Box>
 {/*}
               <Box position={"absolute"} right={0} mt={20}>
