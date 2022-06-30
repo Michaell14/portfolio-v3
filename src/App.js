@@ -1,15 +1,16 @@
-import logo from './logo.svg';
 import './App.css';
 import React, {useState} from 'react';
-import { Box, Text, Image, Button, Center, IconButton, Icon, Flex} from '@chakra-ui/react'
+import { Box, Text, Image, Button, Center, IconButton, Icon, Flex, useDisclosure, Radio, RadioGroup, Stack} from '@chakra-ui/react'
+import { Drawer, DrawerBody, DrawerFooter, DrawerHeader, DrawerOverlay, DrawerContent,DrawerCloseButton} from '@chakra-ui/react'
 import CMD from './components/CMD';
 import { FiGithub, FiLinkedin, FiInstagram, FiCode } from "react-icons/fi";
+import { BsPaintBucket } from "react-icons/bs";
 import $ from "jquery";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const projects=["WOOTTON LIFE", "SUPERLATIVES", "ENCRYPTABLE", "CODELE"];
-const images=["Wootton-Life.png", "Superlatives.png", "Encryptable.png", "Codele.png"]
+const images=["Wootton-Life.png", "Superlatives.png", "Encryptable.png","Codele.png"]
 const descriptions=["A listing for students at Wootton to view upcoming clubs and activities. Creating in an effort to promote school spirit and club interactivity. Improved my utilization of Firebase and Firebase authentication and focused more on making the interface more intuitive.",
  "An online game to play with friends where you vote for the friend who best fits the description of the listed question. Created to make superlative games more fun, interesting, and less time consuming to make. Developed using Socket IO to keep interactions live.",
 "A tool to help visualize popular text encryption ciphers. Created to make learning about ciphers easier for students to understand.",
@@ -17,23 +18,33 @@ const descriptions=["A listing for students at Wootton to view upcoming clubs an
 const tools=[["Firebase", "Chakra UI", "React JS"], ["Socket IO", "Mongo DB", "React JS"],
 ["Anime JS", "Chakra UI", "React JS"], ["Chakra UI", "React JS"]]
 const links=["https://woottonlife.vercel.app/", "https://superlatives3.vercel.app/", "https://encryption-visualizer.vercel.app/", "https://codele.vercel.app/"];
-const colorSchemes=["red", "purple", "cyan", "green"];
+const colorSchemes=["red", "orange", "cyan", "green"];
 const sourceCodes=["https://github.com/Michaell14/woottonlife", "https://github.com/Michaell14/superlatives3",
 "https://github.com/Michaell14/encrypt-visualizer", "https://github.com/Michaell14/codele"];
+
+//small text, descirptions, underlines, lines, h1 text
+const colors=[["AF6997", "BFD7B5", "808080", "AF6997", "383737"],["0081a7", "00afb9", "fdfcdc", "fed9b7", "f07167"], ["780000", "c1121f", "fdf0d5", "003049", "669bbc"]];
 
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
 
+  const [colorIndex, setIndex] = useState(0);
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const btnRef = React.useRef()
+
   return (
     <>
-      <Box id="body">
+      
+
+
+      <Box>
 
         <Box position={"fixed"} right={10} top={"50%"} transform={"translateY(-50%) rotateY(180deg)"} float={"right"} >
-          <Box w={"27px"} borderTop={"2.8px solid #AF6997"} id="line1"></Box>
-          <Box w={"27px"} borderTop={"2.8px solid #AF6997"} mt={4} id="line2"></Box>
-          {/*<Box w={"27px"} borderTop={"2.8px solid #AF6997"} mt={4} id="line3"></Box>*/}
-          <Box w={"27px"} borderTop={"2.8px solid #AF6997"} mt={4} id="line4"></Box>
+          <Box w={"27px"} borderTop={"2.8px solid #" + colors[colorIndex][0]} id="line1"></Box>
+          <Box w={"27px"} borderTop={"2.8px solid #" + colors[colorIndex][0]} mt={4} id="line2"></Box>
+          {/*<Box w={"27px"} borderTop={"2.8px solid #" + colors[colorIndex][0]} mt={4} id="line3"></Box>*/}
+          <Box w={"27px"} borderTop={"2.8px solid #" + colors[colorIndex][0]} mt={4} id="line4"></Box>
         </Box>
 
         <Box position={"fixed"} bottom={0} ml={"60px"} zIndex={1}>
@@ -43,7 +54,7 @@ function App() {
             <a href="https://www.instagram.com/michaells19/" target="_blank" rel="noreferrer"><Icon as={FiInstagram} boxSize={5} mb={4}/></a>
             <a href="https://github.com/Michaell14/portfolio-v3" target="_blank" rel="noreferrer"><Icon as={FiCode} boxSize={5} mb={4}/></a>
           </Flex>
-          <Box h={"100px"} borderLeft={"3px solid #AF6997"}></Box>
+          <Box h={"100px"} borderLeft={"3px solid #" + colors[colorIndex][0]}></Box>
         </Box>
         
 
@@ -53,8 +64,8 @@ function App() {
             
             <Flex mt={"120px"} align={"center"} position={"relative"}>
               <Box mr={"250px"}>
-                  <Text fontSize="40px" color={"#AF6997"}><b>Hey!</b></Text>
-                  <Text fontSize="70px" color={"#383737"}><b>I'm Michael Li,</b></Text>
+                  <Text fontSize="40px" color={"#"+colors[colorIndex][0]}><b>Hey!</b></Text>
+                  <Text fontSize="70px" color={"#" + colors[colorIndex][4]}><b>I'm Michael Li,</b></Text>
                   <Text fontSize="70px" color={"#6D6C6B"}><b id="descriptor"></b></Text>
                   <Text w={"400px"} fontSize={"lg"}>I'm a high school student in Maryland who loves to code and listen to music.
                   I am focused on web development, artifical intelligence, and competitive programming. 
@@ -78,9 +89,6 @@ function App() {
             </Flex>
         </Box>
         
-           
-       
-        
         
         <Center id="projectItems">
           <Box w={"100px"} borderTop={"2.3px solid grey"} mr={10}></Box>
@@ -94,17 +102,19 @@ function App() {
           {projects.map((item, index) => (
             <Center key={item}>
             <Box mt={40} id={"project"+(index+1)} opacity={0} textAlign={"center"}>
+                
                   <Box>
                     <Text fontSize={"4xl"} mb={10} className="title" id={"title"+(index+1)}><a href={links[index]} rel="noreferrer" target="_blank"><b>{item}</b></a></Text>
                     <Box boxShadow={"lg"}>
-                      <Image src={images[index]} h={"70vh"}/>
-                      <a href={sourceCodes[index]} target="_blank" rel="noreferrer"><IconButton colorScheme={colorSchemes[index]} aria-label='Source Code' icon={<FiCode />} position="absolute" right={10} top={"72vh"}/></a>
+                      <Image src={images[index]} h={"70vh"} id={"image"+(index+1)}/>
+                      <a href={sourceCodes[index]} target="_blank" rel="noreferrer"><IconButton colorScheme={colorSchemes[index]} aria-label='Source Code' icon={<FiCode />} position="absolute" right={10} bottom={"17vh"}/></a>
                     </Box>
+                    
                   </Box>
   
                   <Center>
                     <Box mt={"-50px"}>
-                    <Box w={"50vw"} h={"fit-content"} p={5} borderRadius={"5px"} borderColor={"black"} bg={"#BFD7B5"} boxShadow='md'>
+                    <Box w={"50vw"} h={"fit-content"} p={5} borderRadius={"5px"} borderColor={"black"} bg={"#" + colors[colorIndex][1]} boxShadow='md'>
                       <Text fontSize={"md"} lineHeight={"20px"}>{descriptions[index]}</Text>
                     </Box>
   
@@ -118,12 +128,7 @@ function App() {
                   
                 </Box>
             </Center>
-          ))}
-
-
-              
-          
-              
+          ))} 
 
         </Box>
         </Center>
@@ -145,7 +150,11 @@ function App() {
                     
                   <Text mt={5}>Feel free to contact me through <a href="mailto: limichael909@gmail.com" target="_blank" rel="noreferrer" className="socials">email</a>. Find my resume {" "}<a href="Michael_Li_Resume.pdf" className="socials" alt="michael_li_resume" target="_blank" rel="noreferrer">here</a>.</Text>
               </Box>
-              
+{/*}
+              <Box position={"absolute"} right={0} mt={20}>
+                <Text fontSize={"md"} w={"180px"} ml={"70px"}>Take a look at my</Text><Text fontSize={"md"} ml={20}><a href="https://open.spotify.com/user/yvymj5dyeqm16d6ndcf6quctp" target="_blank" rel="noreferrer" id="socialUnderline">Spotify</a> playlist!</Text>
+                  <Image src={"personup.svg"} w={"220px"} filter={"invert(70%)"}/>
+                    </Box>*/}
             </Center>
           <Center my={5}>
               <Box>
@@ -157,8 +166,30 @@ function App() {
                   <a href="https://personalwebsite-neon.vercel.app/" target="_blank" rel="noreferrer"><Button variant="ghost">V1</Button></a>
                 </Center>
               </Box>
+              {/*<IconButton ref={btnRef} onClick={onOpen} icon={<BsPaintBucket />}/>*/}
           </Center>
       </Box>
+
+      <Drawer
+        isOpen={isOpen}
+        placement='bottom'
+        onClose={onClose}
+        finalFocusRef={btnRef}
+      >
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader>Select Color Scheme</DrawerHeader>
+
+          <DrawerBody>
+            <Box>One</Box>
+            <Box>Two</Box>
+            <Box>Three</Box>
+          </DrawerBody>
+
+        </DrawerContent>
+      </Drawer>
+
     </>
 
   );
@@ -291,7 +322,14 @@ $(function(){
     })
   })
   
-  
+  $('#image2').on('click', event => {
+    var newSrc="Superlatives2.png";
+    if (document.getElementById("image2").getAttribute('src')=="Superlatives2.png"){
+      newSrc="Superlatives.png";
+    }
+
+    gsap.set($("#image2"), { attr: { src: newSrc } });
+  });
 })
 
 

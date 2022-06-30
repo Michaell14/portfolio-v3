@@ -22,7 +22,7 @@
 }
 
 .menuunderline:hover::before, .underline:hover::before{
-  transform: scaleX(.7);
+  transform: scaleX(.6);
 }
 
 hr{
